@@ -1,0 +1,93 @@
+.tracker-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(173, 216, 230, 0.409);
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    width: fit-content;
+    padding: 3vw;
+}
+
+.tracker-box button {
+    border: 2px solid black;
+    font-size: 2rem;
+    margin-top: 1rem;
+    padding: 1rem;
+    transition: background-color 0.4s ease;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tracker-box button:hover {
+    background-color: lightgreen;
+}
+
+.tracker-box h4 {
+    margin-bottom: 8px;
+    color: rgb(76, 76, 76);
+    margin-top: 0;
+}
+
+.tracker-box h1 {
+    margin-bottom: 15px;
+}
+
+.tracker-box input {
+    max-width: 30%;
+}
+
+.emoji-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.25rem;
+    justify-content: center;
+    margin-top: 0;
+}
+
+.emoji-box button {
+    padding: 5px 10px 5px 10px;
+    border: 2px solid black;
+    font-size: 2rem;
+    background-color: rgb(232, 232, 232);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.emoji-btn.active,
+.emoji-btn.active:hover {
+    background-color: lightgreen;
+}  
+
+.emoji-box button:hover {
+    background-color: rgb(152, 150, 150);
+    transform: scale(1.1);
+}
+
+.diary-entry {
+    margin-top: 1rem;
+    width: 90%;
+    max-width: 500px;
+    height: 120px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid lightgray;
+    border-radius: 10px;
+    resize: none;
+}       
+
+.toast {
+    background-color: #4caf50;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    position: fixed;
+    opacity: 0.95;
+    z-index: 1000;
+    transition: opacity 0.3s ease-in-out;
+    top: 50%;
+  }
+  
