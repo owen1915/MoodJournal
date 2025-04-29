@@ -1,0 +1,30 @@
+.graph-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(173, 216, 230, 0.409);
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    padding: 3rem;
+    text-align: center;
+    margin: 0;
+}
+
+.heatmap-container {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.heatmap-cell {
+    margin-top: 5vh;
+    width: 4vw;
+    height: 4vw;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 2vw;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

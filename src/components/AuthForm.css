@@ -1,0 +1,32 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: sans-serif;
+    background-color: #fafafa;
+    margin-bottom: 10vh;
+}
+
+span {
+    border: 2px solid black;
+    padding: 2rem;
+    font-size: 2rem;
+    background-color: aliceblue;
+    align-items: center;
+    justify-content: center;
+}
+
+.questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+input {
+    font-size: 1.5rem;
+}
+
+button {
+    font-size: 2rem;
+}
