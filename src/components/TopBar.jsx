@@ -31,7 +31,7 @@ function TopBar() {
   };
 
   return (
-    <div className='container'>
+    <div className='top-bar'>
       <div className='top-bar-content'>
         <h2>Welcome: {username}</h2>
         <button className='logout-btn' onClick={handleLogout}>

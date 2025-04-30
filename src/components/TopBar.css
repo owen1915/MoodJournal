@@ -4,11 +4,9 @@
     color: white;
     display: flex;
     align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    background-color: #333;
 }
 
 .top-bar-content {
@@ -18,8 +16,6 @@
     align-items: center;
     padding: 0 20px; /* 👈 safe padding inside */
     box-sizing: border-box;
-    background-color: #333;
-    color: white;
 }
 
 .logout-btn {

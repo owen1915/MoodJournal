@@ -1,0 +1,44 @@
+.graph-container-advice {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(173, 216, 230, 0.409);
+    border-radius: 10px;
+    border: 2px solid lightgray;
+    padding: 2vw;
+    text-align: center;
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+}
+
+.graph-container-advice button {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    margin: 1rem;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.graph-container-advice button:hover {
+    cursor: pointer;
+    transform: scale(1.20);
+}
+
+.advice-box {
+    max-width: 400px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1.6;
+}

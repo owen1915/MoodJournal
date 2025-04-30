@@ -1,20 +1,32 @@
-import { useEffect, useState } from 'react';
-import { db, auth } from '../firebase';
-import { collection, query, where, getDocs } from 'firebase/firestore';
 import './Graph.css';
+import { useState } from 'react';
 
 function Graph({moodData}) {
 
-  // generate list of last 10 days
-  const last10Days = [];
-  for (let i = 9; i >= 0; i--) {
-    const d = new Date();
+  const [selectedEntry, setSelectedEntry] = useState(null);
+
+  const getEntryForDate = (date) => moodData.find(entry => entry.date === date);
+
+
+  // Sort moodData by date ascending
+  const sortedData = [...moodData].sort((a, b) => new Date(a.date) - new Date(b.date));
+
+  // Get the most recent date in the data
+  const mostRecentDate = sortedData.length > 0
+    ? new Date(sortedData[sortedData.length - 1].date)
+    : new Date();
+
+  // Generate the 30 most recent dates (ending with the latest mood entry)
+  const last30Days = [];
+  for (let   i = 29; i >= 0; i--) {
+    const d = new Date(mostRecentDate);
     d.setDate(d.getDate() - i);
-    last10Days.push(d.toISOString().split('T')[0]); // 'YYYY-MM-DD'
+    last30Days.push(d.toISOString().split('T')[0]);
   }
 
   const getMoodForDate = (date) => {
     const found = moodData.find(entry => entry.date === date);
+    console.log("moodData", moodData);
     return found ? found.mood : null;
   };
 
@@ -41,23 +53,44 @@ function Graph({moodData}) {
 
   return (
     <div className='graph-container'>
-      <h1>Trends</h1>
-      <div className='heatmap-container'>
-        {last10Days.map(date => {
-          const mood = getMoodForDate(date);
-          const emoji = moodsval[mood]
-          return (
-            <div
-              key={date}
-              className='heatmap-cell'
-              style={{ backgroundColor: getColorForMood(mood) }}
-              title={date}
-            >
-              {emoji}
-            </div>
-          );
-        })}
-      </div>
+      {!selectedEntry ? (
+        <>
+          <h1>Last 30 Entries</h1>
+          <p style={{marginBottom: '1rem'}}>*Click Cell to View Entry*</p>
+          <div className='heatmap-container'>
+            {last30Days.map(date => {
+              const entry = getEntryForDate(date);
+              const mood = entry?.mood ?? null;
+              const emoji = moodsval[mood];
+              const [year, month, day] = date.split('-');
+              const formattedDate = `${month}/${day}`;
+              return (
+                <div className='heatmap-item' key={date} 
+                    onClick={() => entry && setSelectedEntry(entry)}>
+                  <div
+                    className='heatmap-cell'
+                    style={{backgroundColor: getColorForMood(mood)}}
+                  >
+                    <div className='heatmap-overlay' onClick={(e) => e.stopPropagation()}>
+                      <p>{formattedDate}</p>
+                    </div>
+                    <div>
+                      {emoji}
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <div className='note-popup'>
+          <h2>{selectedEntry.date}</h2>
+          <div style={{ fontSize: '2rem' }}>{moodsval[selectedEntry.mood]}</div>
+          <p>{selectedEntry.note || 'No note provided.'}</p>
+          <button className='close-btn' onClick={() => setSelectedEntry(null)}>BACK</button>
+        </div>
+      )}
     </div>
   );
 }

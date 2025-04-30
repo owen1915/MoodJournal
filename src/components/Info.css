@@ -1,5 +1,5 @@
 .info-box {
-    background-color: #f0f8ff;
+    background-color: rgba(173, 216, 230, 0.409);
     border: 2px solid #ccc;
     padding: 1rem;
     border-radius: 10px;
@@ -11,5 +11,19 @@
 
 .info-box h2 {
     text-align: center;
+}
+
+.text-box {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    line-height: 1.6;
 }
 

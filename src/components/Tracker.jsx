@@ -1,10 +1,9 @@
 import { db, auth } from '../firebase';
-import { addDoc, serverTimestamp, doc, getDoc } from 'firebase/firestore';
 import { useState, useEffect } from 'react';
 import './Tracker.css';
-import { query, collection, where, getDocs } from 'firebase/firestore';
+import { query, collection, where, getDocs, addDoc } from 'firebase/firestore';
 
-function Tracker({ refreshMoods }) {
+function Tracker({ refreshMoods, refreshKey }) {
   const [selected, setSelected] = useState(null);
   const [entry, setEntry] = useState('');
   const [message, setMessage] = useState('');
@@ -12,8 +11,6 @@ function Tracker({ refreshMoods }) {
 
   const moods = ['😭', '😢', '☹️', '😐', '🙂', '😀', '😁'];
   const moodsval = {'😭' : -3, '😢':-2, '☹️':-1, '😐':0, '🙂':1, '😀':2, '😁':3};
-
-  
 
   const handleSubmit = async () => {
     const mood = moodsval[moods[selected]];
@@ -35,6 +32,7 @@ function Tracker({ refreshMoods }) {
       setAlreadySubmitted(true);
       setTimeout(() => setMessage(''), 2000);
 
+      await refreshKey();
       await refreshMoods();
     } catch (error) {
       console.error('Error adding document: ', error);
@@ -69,7 +67,9 @@ function Tracker({ refreshMoods }) {
   }, []);
 
   return (
-    <>
+    <div>
+      {message && <div className="toast">{message}</div>}
+      <>
       {!alreadySubmitted ? (
         <div className="tracker-box">
             <h1>Daily Mood Check-In</h1>
@@ -80,7 +80,6 @@ function Tracker({ refreshMoods }) {
                     {emoji}
                 </button>
             ))}
-            {message && <div className="toast">{message}</div>}
             </div>
             {selected !== null && (
             <textarea
@@ -101,6 +100,7 @@ function Tracker({ refreshMoods }) {
         </div>
       )}
     </>
+    </div>
   );
 }
 
