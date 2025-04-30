@@ -51,8 +51,10 @@ function TrackContainer() {
     return (
         <div className='container'>
             <TopBar />
-            <Tracker refreshMoods={fetchMoods} refreshKey={refreshMoods}/>
-            <Graph moodData={moodData}/>
+            <div className='two-container'>
+                <Tracker refreshMoods={fetchMoods} refreshKey={refreshMoods}/>
+                <Graph moodData={moodData}/>
+            </div>
             <div className='two-container'>
                 <PieCharts moodData={moodData}/>
                 <Advice refreshKey={refreshKey} moodData={moodData}/>

@@ -96,7 +96,9 @@ function Tracker({ refreshMoods, refreshKey }) {
           )}
         </div>
       ) : (
-        <div>
+        <div className="tracker-box">
+          <h3>You've already submitted your mood for today!</h3>
+          <h4>Check back tomorrow for your next check-in.</h4>
         </div>
       )}
     </>

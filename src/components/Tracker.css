@@ -8,6 +8,8 @@
     border: 2px solid lightgray;
     width: fit-content;
     padding: 3rem;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .tracker-box button {
