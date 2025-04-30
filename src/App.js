@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
-import Tracker from './components/Tracker';
 import { db, auth } from './firebase';
 import { onAuthStateChanged} from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
 import Login from './components/Login';
 import TrackContainer from './components/TrackContainer';
 

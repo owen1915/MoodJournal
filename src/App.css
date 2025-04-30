@@ -1,16 +1,14 @@
 /* App.css */
 .app {
   font-family: sans-serif;
-  background-color: #fafafa;
+  background-color: #1e1e1e;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   overscroll-behavior: contain;
-  overflow: auto;
   justify-content: flex-start;
   align-items: center;
-  margin-bottom: 2rem;
 }
 
 .component-box {
@@ -20,11 +18,13 @@
   gap: 5vw;
   padding-left: 3vw;
   padding-right: 3vw;
+  margin-bottom: 5vh;
 }
 
 .header {
   text-align: center;
   margin-top: 2rem;
+  color: white;
 }
 
 .header h5, h1 {

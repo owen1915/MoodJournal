@@ -13,19 +13,21 @@
 }
 
 .graph-container-pie button {
-    background-color: white;
+    background-color: #d4d4d4
+    ;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
     text-align: center;
     max-width: 400px;
     margin: 1rem;
     padding: 1rem;
-    transition: transform 0.3s ease;
+    transition: all 0.3s ease;
 }
 
 .graph-container-pie button:hover {
     cursor: pointer;
     transform: scale(1.20);
+    background-color: lightgreen;
 }
 
 .pie-container {

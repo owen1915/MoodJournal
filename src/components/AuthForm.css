@@ -1,3 +1,15 @@
+@keyframes neonPulse {
+    0% {
+      box-shadow: 0 0 0px #e3f0ff;
+    }
+    50% {
+      box-shadow: 0 0 20px 5px #eff5fd;;;
+    }
+    100% {
+      box-shadow: 0 0 0px #f0f5fb;;
+    }
+}
+
 .wrapper {
     display: flex;
     justify-content: center;
@@ -5,13 +17,16 @@
     font-family: sans-serif;
     background-color: #fafafa;
     margin-bottom: 10vh;
+    border-radius: 20px;
+
+    animation: neonPulse 2s ease-in-out infinite;
+    overflow: hidden;
 }
 
 span {
-    border: 2px solid black;
     padding: 2rem;
     font-size: 2rem;
-    background-color: aliceblue;
+    background-color: rgb(132, 132, 132);
     align-items: center;
     justify-content: center;
 }
@@ -24,9 +39,27 @@ span {
 }
 
 input {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
+    border: none;
+    border-bottom: 2px solid #ffffff; /* or any color you want */
+    background: transparent;
+    outline: none;
+    padding: 4px 0;
+    color: inherit;
 }
 
 button {
     font-size: 2rem;
+    transition: all 0.4s ease;
 }
+
+button:hover {
+    background-color: lightgreen;
+    transform: scale(1.2);
+}
+
+input:-webkit-autofill {
+    box-shadow: 0 0 0 1000px rgb(132, 132, 132)  inset; /* or use your background color */
+    -webkit-text-fill-color: #000;       /* text color fix */
+    transition: background-color 5000s ease-in-out 0s; /* suppress flash */
+  }
