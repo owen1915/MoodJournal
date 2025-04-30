@@ -3,10 +3,10 @@
       box-shadow: 0 0 0px #e3f0ff;
     }
     50% {
-      box-shadow: 0 0 20px 5px #eff5fd;;;
+      box-shadow: 0 0 20px 5px #eff5fd;;; /* soft neon pulse effect */
     }
     100% {
-      box-shadow: 0 0 0px #f0f5fb;;
+      box-shadow: 0 0 0px #f0f5fb;; /* reset the glow */
     }
 }
 
@@ -19,8 +19,8 @@
     margin-bottom: 10vh;
     border-radius: 20px;
 
-    animation: neonPulse 2s ease-in-out infinite;
-    overflow: hidden;
+    animation: neonPulse 2s ease-in-out infinite; /* applies the glow animation */
+    overflow: hidden; /* keeps the glow inside the border */
 }
 
 span {
@@ -28,20 +28,20 @@ span {
     font-size: 2rem;
     background-color: rgb(132, 132, 132);
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* span is used like a flex child here */
 }
 
 .questions {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1rem; /* spacing between each question */
     margin-bottom: 1rem;
 }
 
 input {
     font-size: 1.3rem;
     border: none;
-    border-bottom: 2px solid #ffffff; /* or any color you want */
+    border-bottom: 2px solid #ffffff; /* just a bottom border */
     background: transparent;
     outline: none;
     padding: 4px 0;
@@ -50,16 +50,21 @@ input {
 
 button {
     font-size: 2rem;
-    transition: all 0.4s ease;
+    transition: all 0.4s ease; /* smooth hover effect */
 }
 
 button:hover {
     background-color: lightgreen;
-    transform: scale(1.2);
+    transform: scale(1.2); /* slightly enlarges on hover */
 }
 
 input:-webkit-autofill {
-    box-shadow: 0 0 0 1000px rgb(132, 132, 132)  inset; /* or use your background color */
-    -webkit-text-fill-color: #000;       /* text color fix */
-    transition: background-color 5000s ease-in-out 0s; /* suppress flash */
-  }
+    box-shadow: 0 0 0 1000px rgb(132, 132, 132) inset; /* hides chrome autofill bg */
+    -webkit-text-fill-color: #000;
+    transition: background-color 5000s ease-in-out 0s; /* suppresses flicker */
+}
+
+input::placeholder {
+    color: white;
+    opacity: 40%; /* softer placeholder appearance */
+}

@@ -1,29 +1,28 @@
 .info-box {
-    background-color: rgba(173, 216, 230, 0.409);
-    border: 2px solid #ccc;
+    background-color: rgba(173, 216, 230, 0.409); /* soft blue background */
+    border: 2px solid #ccc; /* light border */
     padding: 1rem;
-    border-radius: 10px;
+    border-radius: 10px; /* rounded corners */
 }
 
-.info-box p{
-    text-align: justify;
+.info-box p {
+    text-align: justify; /* evenly spaces text across the line */
 }
 
 .info-box h2 {
-    text-align: center;
+    text-align: center; /* center heading */
 }
 
 .text-box {
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
+    word-wrap: break-word; /* wraps long words if needed */
+    overflow-wrap: break-word; /* ensures compatibility */
+    white-space: pre-wrap; /* keeps line breaks from text */
     margin-top: 1rem;
     padding: 1rem;
-    background-color: #d4d4d4;    ;
+    background-color: #d4d4d4; /* light gray background for content */
     border-radius: 10px;
     border: 1px solid lightgray;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* soft shadow */
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.6; /* better readability */
 }
-

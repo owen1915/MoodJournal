@@ -1,7 +1,8 @@
+// TopBar.jsx
 import { useState, useEffect } from 'react';
 import { auth, db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
-import { signOut } from 'firebase/auth'; // 👈 import signOut
+import { signOut } from 'firebase/auth'; // handles logout
 import './TopBar.css';
 
 function TopBar() {
@@ -13,7 +14,7 @@ function TopBar() {
         const ref = doc(db, 'users', auth.currentUser.uid);
         const docSnap = await getDoc(ref);
         if (docSnap.exists()) {
-          setUsername(docSnap.data().username);
+          setUsername(docSnap.data().username); // store username from db
         }
       }
     };
@@ -23,7 +24,7 @@ function TopBar() {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // 👈 sign out the user
+      await signOut(auth); // sign out the user
       console.log('User signed out successfully');
     } catch (error) {
       console.error('Error signing out:', error);

@@ -5,12 +5,14 @@ import { db, auth } from '../firebase';
 import { collection, query, where, getDocs, doc, updateDoc } from 'firebase/firestore';
 
 function Advice({ refreshKey }) {
+  // state to hold mood, note, tip, loading state, and if advice has already been given
   const [mood, setMood] = useState(null);
   const [note, setNote] = useState('');
   const [tip, setTip] = useState('');
   const [loading, setLoading] = useState(false);
   const [adviceGiven, setAdviceGiven] = useState(false);
 
+  // mapping numeric mood values to descriptive text + emoji
   const moodsval = {
     "-3": 'very overwhelmed 😭',
     "-2": 'down 😢',
@@ -21,11 +23,12 @@ function Advice({ refreshKey }) {
     "3": 'amazing 😁'
   };
 
+  // pulls today's mood from firestore and either sets advice or triggers generation
   const getTodayMood = async () => {
     const userId = auth.currentUser?.uid;
     if (!userId) return;
   
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
+    const today = new Date().toISOString().split('T')[0]; // gets today in yyyy-mm-dd
   
     const q = query(
       collection(db, 'moods'),
@@ -44,18 +47,17 @@ function Advice({ refreshKey }) {
         const rawNote = entry.note;
         const docId = docSnap.id;
 
-
         if (entry.advice) {
-        setTip(entry.advice);
-        setAdviceGiven(true);
+          setTip(entry.advice);
+          setAdviceGiven(true);
         } else {
-        // Automatically fetch advice if it hasn't been given yet
-        getAdvice(rawMood, rawNote, docId); // only calls once because this effect runs once on load or refreshKey
+          // fetch advice from openai if not already saved
+          getAdvice(rawMood, rawNote, docId);
         }
     }
   };  
   
-
+  // generates advice based on mood + note and saves it in firestore
   const getAdvice = async (rawMood, rawNote, docId) => {
     if (!rawMood || !rawNote || !docId) return;
   
@@ -88,7 +90,7 @@ function Advice({ refreshKey }) {
       setTip(reply);
       setAdviceGiven(true);
   
-      // Save to Firestore
+      // saves advice into the same firestore doc
       const docRef = doc(db, 'moods', docId);
       await updateDoc(docRef, { advice: reply });
     } catch (err) {
@@ -99,6 +101,7 @@ function Advice({ refreshKey }) {
     }
   };
 
+  // reruns mood fetch when refreshKey changes
   useEffect(() => {
     getTodayMood();
   }, [refreshKey]);
@@ -106,13 +109,15 @@ function Advice({ refreshKey }) {
   return (
     <div className="graph-container-advice">
       <h1>Advice from AI</h1>
-  
+
+      {/* show tip if mood exists, or fallback message */}
       {mood ? (
         <div className="advice-box">{tip}</div>
       ) : (
         <p>No mood found for today. Submit one to get advice.</p>
       )}
-  
+
+      {/* optional loading message */}
       {loading && <h3 style={{fontWeight: 'bold'}}>Loading...</h3>}
     </div>
   );  

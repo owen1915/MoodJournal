@@ -5,8 +5,8 @@
     display: flex;
     align-items: center;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    background-color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* subtle shadow under the bar */
+    background-color: #333; /* dark gray background */
 }
 
 .top-bar-content {
@@ -14,7 +14,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px; /* 👈 safe padding inside */
+    padding: 0 20px; /* space around the edges inside the bar */
     box-sizing: border-box;
 }
 
@@ -25,11 +25,10 @@
     padding: 8px 16px;
     cursor: pointer;
     border-radius: 4px;
-    transition: ease background-color 0.3s;
+    transition: ease background-color 0.3s; /* smooth hover transition */
     font-size: 1.25rem;
 }
 
 .logout-btn:hover {
-    background-color: red;
+    background-color: red; /* turns red on hover */
 }
-  

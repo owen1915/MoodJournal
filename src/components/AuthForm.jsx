@@ -6,28 +6,31 @@ import { setDoc, doc } from 'firebase/firestore';
 import './AuthForm.css';
 
 function AuthForm() {
+  // input state for form fields
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isLogin, setIsLogin] = useState(true);
+  const [isLogin, setIsLogin] = useState(true); // toggles between login/signup
   const [username, setUsername] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       if (isLogin) {
+        // firebase login
         await signInWithEmailAndPassword(auth, email, password);
       } else {
+        // firebase signup
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         const user = userCredential.user;
 
-        // Save username to Firestore under users collection
+        // save username to firestore after signup
         await setDoc(doc(db, "users", user.uid), {
           username: username,
           email: email
         });
       }
     } catch (err) {
-      alert(err.message);
+      alert(err.message); // simple error alert
     }
   };
 

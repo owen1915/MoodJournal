@@ -4,10 +4,10 @@ function Login() {
     return (
     <div className="app">
       <div className="header">
-        <h1>MoodJournal</h1>
-        <h5>by Owen Goodman</h5>
+        <h1>MoodJournal</h1> {/* main app title */}
+        <h5>by Owen Goodman</h5> {/* creator credit */}
       </div>
-      <AuthForm />
+      <AuthForm /> {/* login/signup form */}
     </div>
     )
 }

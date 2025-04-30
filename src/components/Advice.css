@@ -1,10 +1,10 @@
 .graph-container-advice {
     display: flex;
     flex-direction: column;
-    background-color: rgba(173, 216, 230, 0.409);
+    background-color: rgba(173, 216, 230, 0.409); /* soft blue background */
     border-radius: 10px;
     border: 2px solid lightgray;
-    padding: 2vw;
+    padding: 2vw; /* responsive spacing */
     text-align: center;
     margin: 0;
     justify-content: center;
@@ -12,16 +12,16 @@
 }
 
 .advice-box {
-    max-width: 400px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
+    max-width: 400px; /* limit width so it doesn't stretch too far */
+    word-wrap: break-word; /* wrap long words if needed */
+    overflow-wrap: break-word; /* fallback for older browsers */
+    white-space: pre-wrap; /* keeps line breaks and spacing */
     margin-top: 1rem;
     padding: 1rem;
-    background-color: #d4d4d4;
+    background-color: #d4d4d4; /* light gray background for contrast */
     border-radius: 10px;
     border: 1px solid lightgray;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
     text-align: left;
-    line-height: 1.6;
+    line-height: 1.6; /* improves readability */
 }

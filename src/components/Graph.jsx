@@ -3,33 +3,34 @@ import { useState } from 'react';
 
 function Graph({moodData}) {
 
-  const [selectedEntry, setSelectedEntry] = useState(null);
+  const [selectedEntry, setSelectedEntry] = useState(null); // track which entry is selected
 
   const getEntryForDate = (date) => moodData.find(entry => entry.date === date);
 
-
-  // Sort moodData by date ascending
+  // sort mood entries by date so we can find the most recent
   const sortedData = [...moodData].sort((a, b) => new Date(a.date) - new Date(b.date));
 
-  // Get the most recent date in the data
+  // get the most recent date from the sorted list
   const mostRecentDate = sortedData.length > 0
     ? new Date(sortedData[sortedData.length - 1].date)
     : new Date();
 
-  // Generate the 30 most recent dates (ending with the latest mood entry)
+  // generate the last 30 days ending with the latest mood entry
   const last30Days = [];
-  for (let   i = 29; i >= 0; i--) {
+  for (let i = 29; i >= 0; i--) {
     const d = new Date(mostRecentDate);
     d.setDate(d.getDate() - i);
-    last30Days.push(d.toISOString().split('T')[0]);
+    last30Days.push(d.toISOString().split('T')[0]); // format as yyyy-mm-dd
   }
 
+  // gets mood value for a given date (or null if not found)
   const getMoodForDate = (date) => {
     const found = moodData.find(entry => entry.date === date);
     console.log("moodData", moodData);
     return found ? found.mood : null;
   };
 
+  // maps mood numbers to emoji
   const moodsval = {
     "-3": '😭',
     "-2": '😢',
@@ -40,6 +41,7 @@ function Graph({moodData}) {
      "3": '😁'
   };
 
+  // picks a background color based on mood value
   const getColorForMood = (mood) => {
     if (mood === null) return '#ccc'; // no data = grey
     if (mood === 0) return '#ffffC5'; // 0 = yellow
@@ -84,6 +86,7 @@ function Graph({moodData}) {
           </div>
         </>
       ) : (
+        // show popup with note and mood when an entry is selected
         <div className='note-popup'>
           <h2>{selectedEntry.date}</h2>
           <div style={{ fontSize: '2rem' }}>{moodsval[selectedEntry.mood]}</div>

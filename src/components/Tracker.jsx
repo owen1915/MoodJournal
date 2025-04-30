@@ -1,3 +1,4 @@
+// Tracker.jsx
 import { db, auth } from '../firebase';
 import { useState, useEffect } from 'react';
 import './Tracker.css';
@@ -8,10 +9,13 @@ function Tracker({ refreshMoods, refreshKey }) {
   const [entry, setEntry] = useState('');
   const [message, setMessage] = useState('');
   const [username, setUsername] = useState('');
+  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
 
+  // emoji list and mood value mapping
   const moods = ['😭', '😢', '☹️', '😐', '🙂', '😀', '😁'];
-  const moodsval = {'😭' : -3, '😢':-2, '☹️':-1, '😐':0, '🙂':1, '😀':2, '😁':3};
+  const moodsval = {'😭' : -3, '😢': -2, '☹️': -1, '😐': 0, '🙂': 1, '😀': 2, '😁': 3};
 
+  // handles mood submission to firebase
   const handleSubmit = async () => {
     const mood = moodsval[moods[selected]];
     const note = entry;
@@ -25,25 +29,23 @@ function Tracker({ refreshMoods, refreshKey }) {
         note,
         date: today
       });
-  
+
       setSelected(null);
       setEntry('');
       setMessage('Mood submitted!');
       setAlreadySubmitted(true);
       setTimeout(() => setMessage(''), 2000);
 
-      await refreshKey();
-      await refreshMoods();
+      await refreshKey(); // for triggering advice
+      await refreshMoods(); // to update mood graph and pie
     } catch (error) {
       console.error('Error adding document: ', error);
       setMessage('Failed to submit mood.');
       setTimeout(() => setMessage(''), 2000);
     }
-  };  
+  };
 
-
-  const [alreadySubmitted, setAlreadySubmitted] = useState(false);
-
+  // checks if the user has already submitted today
   useEffect(() => {
     const checkMoodSubmission = async () => {
       const userId = auth.currentUser.uid;
@@ -72,16 +74,20 @@ function Tracker({ refreshMoods, refreshKey }) {
       <>
       {!alreadySubmitted ? (
         <div className="tracker-box">
-            <h1>Daily Mood Check-In</h1>
-            <h4>Describe your feelings with an Emoji</h4>
-            <div className="emoji-box">   
+          <h1>Daily Mood Check-In</h1>
+          <h4>Describe your feelings with an Emoji</h4>
+          <div className="emoji-box">   
             {moods.map((emoji, index) => (
-                <button key={index} className={`emoji-btn ${selected === index ? 'active' : ''}`} onClick={() => setSelected(index)}>
-                    {emoji}
-                </button>
+              <button
+                key={index}
+                className={`emoji-btn ${selected === index ? 'active' : ''}`}
+                onClick={() => setSelected(index)}
+              >
+                {emoji}
+              </button>
             ))}
-            </div>
-            {selected !== null && (
+          </div>
+          {selected !== null && (
             <textarea
               className="diary-entry"
               placeholder="Write why you feel this way..."
@@ -91,8 +97,8 @@ function Tracker({ refreshMoods, refreshKey }) {
           )}
           {entry !== '' && (
             <button onClick={handleSubmit}>
-            Submit
-          </button>
+              Submit
+            </button>
           )}
         </div>
       ) : (
@@ -101,7 +107,7 @@ function Tracker({ refreshMoods, refreshKey }) {
           <h4>Check back tomorrow for your next check-in.</h4>
         </div>
       )}
-    </>
+      </>
     </div>
   );
 }

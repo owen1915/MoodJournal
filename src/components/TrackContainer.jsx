@@ -1,6 +1,7 @@
+// TrackContainer.jsx
 import Tracker from './Tracker';
 import TopBar from './TopBar';
-import './TrackContainer.css'
+import './TrackContainer.css';
 import Graph from './Graph';
 import { useState, useEffect } from 'react';
 import { db, auth } from '../firebase';
@@ -11,10 +12,10 @@ import InfoRow from './InfoRow';
 
 function TrackContainer() {
     const [moodData, setMoodData] = useState([]);
-    const [refreshKey, setRefreshKey] = useState(0);
+    const [refreshKey, setRefreshKey] = useState(0); // used to re-trigger data updates
 
     const refreshMoods = () => {
-        setRefreshKey(prev => prev + 1);
+        setRefreshKey(prev => prev + 1); // increment to trigger useEffect
     };
 
     const fetchMoods = async () => {
@@ -32,20 +33,20 @@ function TrackContainer() {
         querySnapshot.forEach(docSnap => {
             const data = docSnap.data();
             if (data.date) {
-            moods.push({
-                date: data.date,
-                mood: data.mood,
-                note: data.note,
-                advice: data.advice
-            });
+                moods.push({
+                    date: data.date,
+                    mood: data.mood,
+                    note: data.note,
+                    advice: data.advice
+                });
             }
         });
         
-        setMoodData(moods);
+        setMoodData(moods); // update state with mood entries
     };
 
     useEffect(() => {
-        fetchMoods();
+        fetchMoods(); // load on mount
     }, []);
     
     return (
@@ -61,7 +62,7 @@ function TrackContainer() {
             </div>
             <InfoRow />
         </div>
-    )
+    );
 }
 
 export default TrackContainer;

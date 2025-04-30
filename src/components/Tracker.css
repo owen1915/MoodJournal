@@ -1,9 +1,10 @@
+/* tracker container styling */
 .tracker-box {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(173, 216, 230, 0.409);
+    background-color: rgba(173, 216, 230, 0.409); /* soft blue */
     border-radius: 10px;
     border: 2px solid lightgray;
     width: fit-content;
@@ -40,6 +41,7 @@
     max-width: 30%;
 }
 
+/* emoji button container */
 .emoji-box {
     display: flex;
     flex-direction: row;
@@ -49,6 +51,7 @@
     margin-top: 0;
 }
 
+/* emoji buttons */
 .emoji-box button {
     padding: 5px 10px 5px 10px;
     border: 2px solid black;
@@ -62,13 +65,14 @@
 .emoji-btn.active,
 .emoji-btn.active:hover {
     background-color: lightgreen;
-}  
+}
 
 .emoji-box button:hover {
     background-color: rgb(152, 150, 150);
     transform: scale(1.1);
 }
 
+/* mood explanation text area */
 .diary-entry {
     margin-top: 1rem;
     width: 90%;
@@ -79,8 +83,9 @@
     border: 2px solid lightgray;
     border-radius: 10px;
     resize: none;
-}       
+}
 
+/* small toast for submission feedback */
 .toast {
     background-color: #4caf50;
     color: white;
@@ -91,6 +96,5 @@
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
     margin: auto;
-    transform: translateX(-50%)
+    transform: translateX(-50%);
 }
-  
