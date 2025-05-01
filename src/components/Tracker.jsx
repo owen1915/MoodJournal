@@ -20,7 +20,10 @@ function Tracker({ refreshMoods, refreshKey }) {
     const mood = moodsval[moods[selected]];
     const note = entry;
     const userId = auth.currentUser.uid;
-    const today = new Date().toISOString().split('T')[0];
+    const estNow = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+    const [month, day, year] = estNow.split(',')[0].split('/');
+    const today = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+
   
     try {
       await addDoc(collection(db, "moods"), {
@@ -49,7 +52,10 @@ function Tracker({ refreshMoods, refreshKey }) {
   useEffect(() => {
     const checkMoodSubmission = async () => {
       const userId = auth.currentUser.uid;
-      const today = new Date().toISOString().split('T')[0];
+      const estNow = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+      const [month, day, year] = estNow.split(',')[0].split('/');
+      const today = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+
 
       const q = query(
         collection(db, 'moods'),

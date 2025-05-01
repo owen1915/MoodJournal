@@ -95,6 +95,6 @@
     opacity: 0.95;
     z-index: 1000;
     transition: opacity 0.3s ease-in-out;
-    margin: auto;
+    left: 50%;
     transform: translateX(-50%);
 }

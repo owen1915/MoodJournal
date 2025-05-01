@@ -28,8 +28,11 @@ function Advice({ refreshKey }) {
     const userId = auth.currentUser?.uid;
     if (!userId) return;
   
-    const today = new Date().toISOString().split('T')[0]; // gets today in yyyy-mm-dd
-  
+    const estNow = new Date().toLocaleString('en-US', { timeZone: 'America/New_York' });
+    const [month, day, year] = estNow.split(',')[0].split('/');
+    const today = `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`; // gets today in yyyy-mm-dd
+    
+
     const q = query(
       collection(db, 'moods'),
       where('userId', '==', userId),
@@ -59,11 +62,11 @@ function Advice({ refreshKey }) {
   
   // generates advice based on mood + note and saves it in firestore
   const getAdvice = async (rawMood, rawNote, docId) => {
-    if (!rawMood || !rawNote || !docId) return;
+    if (rawMood === undefined || rawNote === undefined || !docId) return;
   
     setLoading(true);
     setTip('');
-  
+
     try {
       const moodText = moodsval[rawMood.toString()];
   
